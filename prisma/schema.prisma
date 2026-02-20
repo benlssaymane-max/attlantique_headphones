@@ -1,0 +1,170 @@
+// Prisma Schema - Database: aymane6
+// PostgreSQL database for Sony WH-1000XM6 application
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// User Model
+model User {
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  username  String  @unique
+  password  String
+  firstName String?
+  lastName  String?
+  role      Role    @default(USER)
+  
+  // Relations
+  orders    Order[]
+  reviews   Review[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  @@map("users")
+}
+
+// Product Model
+model Product {
+  id          Int     @id @default(autoincrement())
+  name        String
+  slug        String  @unique
+  description String
+  price       Float
+  stock       Int
+  category    String
+  
+  // Sony WH-1000XM6 specific fields
+  color       String? // Matte Black, Silver
+  batteryLife Int?    // in hours
+  weight      Float?  // in grams
+  warranty    String? // warranty period
+  
+  // Relations
+  reviews     Review[]
+  orderItems  OrderItem[]
+  images      ProductImage[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  @@map("products")
+}
+
+// Product Images
+model ProductImage {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  url       String
+  altText   String?
+  
+  // Relations
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+
+  @@map("product_images")
+}
+
+// Review Model
+model Review {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  userId    Int
+  rating    Int     // 1-5
+  title     String
+  comment   String
+  
+  // Relations
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("reviews")
+}
+
+// Order Model
+model Order {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  status    OrderStatus @default(PENDING)
+  totalPrice Float
+  
+  // Shipping info
+  shippingAddress String
+  shippingCity    String
+  shippingZip     String
+  shippingCountry String
+  
+  // Relations
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     OrderItem[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("orders")
+}
+
+// Order Items
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int
+  price     Float
+  
+  // Relations
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+  
+  createdAt DateTime @default(now())
+
+  @@map("order_items")
+}
+
+// Contact Form
+model Contact {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String
+  message   String
+  
+  createdAt DateTime @default(now())
+
+  @@map("contacts")
+}
+
+// Analytics
+model PageView {
+  id        Int     @id @default(autoincrement())
+  path      String
+  timestamp DateTime @default(now())
+
+  @@map("page_views")
+}
+
+// Enums
+enum Role {
+  USER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}

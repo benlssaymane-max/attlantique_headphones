@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-dark: #050505;
+    --brand-dark-secondary: #0f0f11;
+    --brand-accent: #C5A059;
+  }
+
+  body {
+    background-color: var(--brand-dark);
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opactiy='0.05'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: 0.03;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .brand-button-primary {
+    @apply px-8 py-3 rounded-full bg-white text-brand-dark font-medium hover:bg-zinc-200 transition-all duration-500 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)];
+  }
+
+  .brand-button-secondary {
+    @apply px-8 py-3 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 hover:border-white/40 transition-all duration-500 backdrop-blur-sm;
+  }
+
+  .brand-card {
+    @apply bg-brand-dark-secondary rounded-2xl border border-white/5 overflow-hidden backdrop-blur-md;
+  }
+
+  .brand-input {
+    @apply w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:border-brand-accent focus:bg-white/10 focus:outline-none transition-all duration-300;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar - Premium minimal */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--brand-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f3f;
+}
