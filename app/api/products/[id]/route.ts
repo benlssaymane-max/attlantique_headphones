@@ -1,17 +1,15 @@
 // /app/api/products/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import prisma from '../../../../lib/prisma'
 
 // GET single product
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const product = await prisma.product.findUnique({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt((await context.params).id) },
       include: {
         images: true,
         reviews: {
@@ -49,13 +47,13 @@ export async function GET(
 // UPDATE product
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const data = await request.json()
 
     const product = await prisma.product.update({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt((await context.params).id) },
       data
     })
 
@@ -74,11 +72,11 @@ export async function PUT(
 // DELETE product
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     await prisma.product.delete({
-      where: { id: parseInt(params.id) }
+      where: { id: parseInt((await context.params).id) }
     })
 
     return NextResponse.json({ message: 'Product deleted' })

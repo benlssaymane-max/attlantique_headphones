@@ -2,7 +2,7 @@
 // PostgreSQL database for Sony WH-1000XM6 application
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
