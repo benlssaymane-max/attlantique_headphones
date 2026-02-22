@@ -1,52 +1,52 @@
 {
-  "name": "wh-1000xm6-full",
-  "version": "1.0.0",
-  "description": "Sony WH-1000XM6 Full-Stack E-Commerce Platform with Premium Scrollytelling",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:push": "prisma db push",
-    "db:seed": "node -r ts-node/register scripts/seed.ts",
-    "db:studio": "prisma studio",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
-    "docker:logs": "docker-compose logs -f postgres",
-    "export": "next export"
-  },
-  "dependencies": {
-    "@prisma/client": "^5.7.0",
-    "autoprefixer": "^10.4.0",
-    "axios": "^1.6.2",
-    "bcryptjs": "^2.4.3",
-    "framer-motion": "^10.16.0",
-    "jsonwebtoken": "^9.0.2",
-    "next": "^16.1.6",
-    "postcss": "^8.4.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.0"
-  },
-  "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/jsonwebtoken": "^9.0.5",
-    "@types/node": "^20.0.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "@typescript-eslint/eslint-plugin": "^8.56.0",
-    "@typescript-eslint/parser": "^8.56.0",
-    "eslint": "^10.0.1",
-    "eslint-config-next": "^12.0.4",
-    "prisma": "^5.7.0",
-    "tailwindcss-animate": "^1.0.7",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.3.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  }
+    "name":  "wh-1000xm6-full",
+    "version":  "1.0.0",
+    "description":  "Sony WH-1000XM6 Full-Stack E-Commerce Platform with Premium Scrollytelling",
+    "private":  true,
+    "scripts":  {
+                    "dev":  "next dev",
+                    "build":  "next build",
+                    "start":  "next start",
+                    "lint":  "next lint",
+                    "db:generate":  "prisma generate",
+                    "db:migrate":  "prisma migrate dev",
+                    "db:push":  "prisma db push",
+                    "db:seed":  "node -r ts-node/register scripts/seed.ts",
+                    "db:studio":  "prisma studio",
+                    "docker:up":  "docker-compose up -d",
+                    "docker:down":  "docker-compose down",
+                    "docker:logs":  "docker-compose logs -f postgres",
+                    "export":  "next export"
+                },
+    "dependencies":  {
+                         "@prisma/client":  "^5.7.0",
+                         "autoprefixer":  "^10.4.0",
+                         "axios":  "^1.6.2",
+                         "bcryptjs":  "^2.4.3",
+                         "framer-motion":  "^10.16.0",
+                         "jsonwebtoken":  "^9.0.2",
+                         "next":  "^16.1.6",
+                         "postcss":  "^8.4.0",
+                         "react":  "^18.2.0",
+                         "react-dom":  "^18.2.0",
+                         "tailwindcss":  "^3.3.0"
+                     },
+    "devDependencies":  {
+                            "@types/bcryptjs":  "^2.4.2",
+                            "@types/jsonwebtoken":  "^9.0.5",
+                            "@types/node":  "^20.0.0",
+                            "@types/react":  "^18.2.0",
+                            "@types/react-dom":  "^18.2.0",
+                            "@typescript-eslint/eslint-plugin":  "^8.56.0",
+                            "@typescript-eslint/parser":  "^8.56.0",
+                            "eslint":  "^9.18.0",
+                            "eslint-config-next":  "^16.1.6",
+                            "prisma":  "^5.7.0",
+                            "tailwindcss-animate":  "^1.0.7",
+                            "ts-node":  "^10.9.1",
+                            "typescript":  "^5.3.0"
+                        },
+    "engines":  {
+                    "node":  "\u003e=18.0.0"
+                }
 }
